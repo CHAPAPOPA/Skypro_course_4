@@ -1,7 +1,7 @@
 class Product:
     name: str
     description: str
-    price: float
+    price: int or float
     count_in_stock: int
 
     def __init__(self, name, description, price, count_in_stock):
