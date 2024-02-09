@@ -28,13 +28,3 @@ class Category:
 
     def __repr__(self):
         return f'{self.name} {self.description} {self.__products}'
-
-
-ex_3 = Product('Молоко', 'Из цельного молока', 140.67, 45)
-ex_1 = Category('Молочные', 'Из цельного молока')
-print(ex_1.add_products(ex_3))
-print(ex_1)
-print(ex_1.get_products_list())
-# ex_2 = Category('Мясные', 'Из говядины', ['Шейка', 'Спинка', 'Лопаточная часть', 'Вырезка рибай'])
-# print(Category.total_categories)
-# print(Category.total_unique_products)
