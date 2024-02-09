@@ -28,6 +28,3 @@ class Category:
 
     def __repr__(self):
         return f'{self.name} {self.description} {self.__products}'
-
-
-
