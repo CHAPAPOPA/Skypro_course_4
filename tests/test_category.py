@@ -3,8 +3,6 @@ import pytest
 from src.category import Category
 from src.product import Product
 
-product_1 = Product('Молоко', 'Из цельного молока', 140.67, 45)
-
 
 @pytest.fixture()
 def category_milk():
@@ -12,24 +10,22 @@ def category_milk():
 
 
 @pytest.fixture()
-def category_beef():
-    return Category('Мясные', 'Из говядины')
+def category_product():
+    return Product('Молоко', 'Из цельного молока', 140.67, 45)
 
 
 def test_init_milk(category_milk):
     assert category_milk.name == 'Молочные'
     assert category_milk.description == 'Из цельного молока'
-    assert Category.total_categories == 2
+    assert Category.total_categories == 1
 
 
-def test_init_beef(category_beef):
-    assert category_beef.name == 'Мясные'
-    assert category_beef.description == 'Из говядины'
-    assert Category.total_categories == 3
+def test_get_products_list(category_milk, category_product):
+    category_milk.add_products(category_product)
+    products_list = category_milk.get_products_list
+    assert len(products_list) == 1
+    assert products_list[0] == 'Молоко, 140.67 руб. Остаток: 45 шт.'
 
 
-def test_add_products(category_milk):
-    assert category_milk.add_products(product_1) == [product_1]
-
-
-
+def test_repr(category_milk):
+    assert repr(category_milk) == 'Молочные Из цельного молока []'
