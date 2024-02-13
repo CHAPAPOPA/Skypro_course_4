@@ -45,5 +45,18 @@ def test_set_price_zero(milk, capsys):
     assert "Цена введена некорректная" in captured.out
 
 
+def test_addition(milk):
+    cheese = Product('Сыр', 'Тильзитер', 120, 67)
+    total_cost = milk + cheese
+    assert total_cost == 140.67 * 45 + 120 * 67
+
+
+def test_str(milk):
+    assert str(milk) == 'Молоко, 140.67 руб. Остаток: 45 шт.'
+
+
 def test_repr(milk):
     assert repr(milk) == "Молоко 140.67 45"
+
+
+
