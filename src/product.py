@@ -28,13 +28,26 @@ class Product:
         else:
             self._price = new_price
 
+    def __add__(self, other):
+        return self.price * self.count_in_stock + other.price * other.count_in_stock
+
+    def __str__(self):
+        return f'{self.name}, {self.price} руб. Остаток: {self.count_in_stock} шт.'
+
     def __repr__(self):
         return f'{self.name} {self.price} {self.count_in_stock}'
 
 
-# ex_1 = Product('Молоко', 'Из цельного молока', 100, 45)
-# print(ex_1)
-# print(ex_1.create_product('Говядина', 'Отборная', 23, 44))
-# print(ex_1.get_price)
-# ex_1.get_price = -1
-# ex_1.get_price = 0
+ex_1 = Product('Молоко', 'Из цельного молока', 100, 45)
+ex_2 = Product('Говядина', 'Отборная', 23, 44)
+ex_3 = Product('.', '.', 0, 0)
+
+
+ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67)
+print(ex_3_normal)
+print(ex_1.price)
+ex_3.price = 0
+ex_3.price = 121
+print(ex_3.price)
+print(ex_1 + ex_3_normal)
+print(str(ex_1))
