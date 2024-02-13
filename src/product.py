@@ -43,11 +43,11 @@ ex_2 = Product('Говядина', 'Отборная', 23, 44)
 ex_3 = Product('.', '.', 0, 0)
 
 
-ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67)
-print(ex_3_normal)
-print(ex_1.price)
-ex_3.price = 0
-ex_3.price = 121
-print(ex_3.price)
-print(ex_1 + ex_3_normal)
-print(str(ex_1))
+# ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67)
+# print(ex_3_normal)
+# print(ex_1.price)
+# ex_3.price = 0
+# ex_3.price = 121
+# print(ex_3.price)
+# print(ex_1 + ex_3_normal)
+# print(str(ex_1))
