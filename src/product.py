@@ -31,18 +31,22 @@ class Product:
     def __add__(self, other):
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
+    def __len__(self):
+        """Метод возвращает количество товаров на складе."""
+        return self.count_in_stock
+
     def __str__(self):
-        return f'{self.name}, {self.price} руб. Остаток: {self.count_in_stock} шт.'
+        return f'{self.name}, {self.price} руб. Остаток: {len(self)} шт.'
 
     def __repr__(self):
-        return f'{self.name} {self.price} {self.count_in_stock}'
+        return f'{self.name} {self.price} {len(self)}'
 
 
-ex_1 = Product('Молоко', 'Из цельного молока', 100, 45)
-ex_2 = Product('Говядина', 'Отборная', 23, 44)
-ex_3 = Product('.', '.', 0, 0)
-
-
+# ex_1 = Product('Молоко', 'Из цельного молока', 100, 45)
+# ex_2 = Product('Говядина', 'Отборная', 23, 44)
+# ex_3 = Product('.', '.', 0, 0)
+#
+#
 # ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67)
 # print(ex_3_normal)
 # print(ex_1.price)

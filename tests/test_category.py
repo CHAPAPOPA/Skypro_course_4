@@ -23,7 +23,7 @@ def test_init_milk(category_milk):
     assert category_milk.name == 'Молочные'
     assert category_milk.description == 'Из цельного молока'
     assert category_milk._Category__products == []
-    assert Category.total_categories == 3
+    assert Category.total_categories == 1
 
 
 def test_add_products_2(category_milk, product_milk, product_cheese):
