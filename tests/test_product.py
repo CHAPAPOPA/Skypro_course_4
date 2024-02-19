@@ -73,13 +73,13 @@ def test_set_price(milk):
 def test_set_price_negative(milk, capsys):
     milk.price = -100
     captured = capsys.readouterr()
-    assert "Цена введена некорректная" in captured.out
+    assert 'Цена введена некорректная' in captured.out
 
 
 def test_set_price_zero(milk, capsys):
     milk.price = 0
     captured = capsys.readouterr()
-    assert "Цена введена некорректная" in captured.out
+    assert 'Цена введена некорректная' in captured.out
 
 
 def test_addition(milk, smartphone):
