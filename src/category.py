@@ -1,4 +1,4 @@
-from src.product import Product
+from src.product import Product, Smartphone, LawnGrass
 
 
 class Category:
@@ -18,8 +18,10 @@ class Category:
 
     def add_products(self, product):
         """Метод добавления товаров в список-атрибут класса."""
-        self.__products.append(product)
-        return self.__products
+        if isinstance(product, Product):
+            self.__products.append(product)
+            return self.__products
+        raise TypeError('Можно добавить только экземпляры классов Product или его наследников')
 
     @property
     def get_products_list(self):
@@ -28,7 +30,7 @@ class Category:
 
     def __len__(self):
         """Метод возвращает общее количество товаров в категории."""
-        total_stock = sum(product.count_in_stock for product in self.__products)
+        total_stock = sum(i.count_in_stock for i in self.__products)
         return total_stock
 
     def __str__(self):
@@ -38,17 +40,21 @@ class Category:
         return f'{self.__class__.__name__}({self.name}, {self.description}, {self.__products})'
 
 
-# ex_product_1 = Product('Молоко', 'Из цельного молока', 45, 100)
-# ex_product_2 = Product('Мясо', 'Говядина', 456, 23)
-# ex_product_3 = Product('Сыр', 'Тильзитер', 120, 67)
+# ex_product_1 = Product('Молоко', 'Из цельного молока', 100, 45, 'Молочные', 'Белое')
+# ex_product_2 = Product('Говядина', 'Отборная', 23, 44, 'Мясо', 'Красная')
+# ex_product_3 = Product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
+# ex_smartphone = Smartphone('iPhone 13', 'Смартфон Apple', 91_000, 10, 'Smartphone', 'чёрный', 8, '13', '256GB')
+# ex_lawn_grass = LawnGrass('Bluegrass', 'Семена газонной травы', 5, 100, 'LawnGrass', 'зелёный', 'USA', 14)
 # ex_1 = Category('Молочные', 'Из цельного молока', [ex_product_1])
 # ex_2 = Category('Мясо', 'Говядина', [ex_product_2])
-# ex_1.add_products(ex_product_3)
+# ex_no = ('Мясо', 'Говядина')
 #
 #
+# ex_1.add_products(ex_lawn_grass)
+# # ex_1.add_products(ex_no)
 # print(repr(ex_1))
 # print(repr(ex_2))
 # print(len(ex_1))
 # print(len(ex_2))
-# print(str(ex_1))
+# print(str(ex_smartphone))
 # print(str(ex_2))

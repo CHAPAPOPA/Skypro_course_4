@@ -3,17 +3,21 @@ class Product:
     description: str
     price: int or float
     count_in_stock: int
+    category: str
+    color: str
 
-    def __init__(self, name, description, price, count_in_stock):
+    def __init__(self, name, description, price, count_in_stock, category, color):
         self.name = name
         self.description = description
         self._price = price
         self.count_in_stock = count_in_stock
+        self.category = category
+        self.color = color
 
     @classmethod
-    def create_product(cls, name, description, price, count_in_stock):
+    def create_product(cls, name, description, price, count_in_stock, category, color):
         """Метод для создания экземпляров класса Product"""
-        return cls(name, description, price, count_in_stock)
+        return cls(name, description, price, count_in_stock, category, color)
 
     @property
     def price(self):
@@ -29,6 +33,8 @@ class Product:
             self._price = new_price
 
     def __add__(self, other):
+        if type(self) != type(other):
+            raise TypeError('Нельзя складывать продукты разных типов')
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
     def __len__(self):
@@ -39,15 +45,38 @@ class Product:
         return f'{self.name}, {self.price} руб. Остаток: {len(self)} шт.'
 
     def __repr__(self):
-        return f'{self.name} {self.price} {len(self)}'
+        return f'{self.__class__.__name__}({self.name}, {self.price}, {len(self)}, {self.category}, {self.color})'
 
 
-# ex_1 = Product('Молоко', 'Из цельного молока', 100, 45)
-# ex_2 = Product('Говядина', 'Отборная', 23, 44)
-# ex_3 = Product('.', '.', 0, 0)
+class Smartphone(Product):
+    efficiency: int or float
+    model: str
+    amount_memory: str
+
+    def __init__(self, name, description, price, count_in_stock, category, color, efficiency, model, amount_memory):
+        super().__init__(name, description, price, count_in_stock, category, color)
+        self.efficiency = efficiency
+        self.model = model
+        self.amount_memory = amount_memory
+
+
+class LawnGrass(Product):
+    origin_country: str
+    germination_period: int or float
+
+    def __init__(self, name, description, price, count_in_stock, category, color, origin_country, germination_period):
+        super().__init__(name, description, price, count_in_stock, category, color)
+        self.origin_country = origin_country
+        self.germination_period = germination_period
+
+
+# ex_1 = Product('Молоко', 'Из цельного молока', 100, 45, 'Молочные', 'Белое')
+# ex_2 = Product('Говядина', 'Отборная', 23, 44, 'Мясо', 'Красная')
+# ex_3 = Product('.', '.', 0, 0, '', '')
+# ex_4 = Smartphone('iPhone 13', 'Смартфон Apple', 91_000, 10, 'Smartphone', 'чёрный', 8, '13', '256GB')
+# ex_5 = LawnGrass('Bluegrass', 'Семена газонной травы', 5, 100, 'LawnGrass', 'зелёный', 'USA', 14)
 #
-#
-# ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67)
+# ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
 # print(ex_3_normal)
 # print(ex_1.price)
 # ex_3.price = 0
@@ -55,3 +84,5 @@ class Product:
 # print(ex_3.price)
 # print(ex_1 + ex_3_normal)
 # print(str(ex_1))
+# print(repr(ex_5))
+# # print(ex_1 + ex_5)
