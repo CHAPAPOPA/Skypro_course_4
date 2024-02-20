@@ -87,9 +87,11 @@ def test_addition(milk, smartphone, lawn_grass):
     total_cost = milk + cheese
     assert total_cost == 140.67 * 45 + 120 * 67
     with pytest.raises(TypeError):
-        milk + smartphone
+        milk + 5
     with pytest.raises(TypeError):
-        lawn_grass + smartphone
+        smartphone + 5
+    with pytest.raises(TypeError):
+        lawn_grass + 5
 
 
 def test_len(milk):
