@@ -33,7 +33,8 @@ class Product:
             self._price = new_price
 
     def __add__(self, other):
-        if type(other) != Product:
+        # if type(self) != type(other):
+        if not isinstance(other, Product):
             raise TypeError('Нельзя складывать продукты разных типов')
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
