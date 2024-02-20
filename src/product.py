@@ -33,7 +33,7 @@ class Product:
             self._price = new_price
 
     def __add__(self, other):
-        if type(self) != type(other):
+        if type(other) != Product:
             raise TypeError('Нельзя складывать продукты разных типов')
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
@@ -59,6 +59,11 @@ class Smartphone(Product):
         self.model = model
         self.amount_memory = amount_memory
 
+    def __add__(self, other):
+        if not isinstance(other, Smartphone):
+            raise TypeError('Нельзя складывать продукты разных типов')
+        return self.price * self.count_in_stock + other.price * other.count_in_stock
+
 
 class LawnGrass(Product):
     origin_country: str
@@ -68,6 +73,11 @@ class LawnGrass(Product):
         super().__init__(name, description, price, count_in_stock, category, color)
         self.origin_country = origin_country
         self.germination_period = germination_period
+
+    def __add__(self, other):
+        if not isinstance(other, LawnGrass):
+            raise TypeError('Нельзя складывать продукты разных типов')
+        return self.price * self.count_in_stock + other.price * other.count_in_stock
 
 
 # ex_1 = Product('Молоко', 'Из цельного молока', 100, 45, 'Молочные', 'Белое')
@@ -85,4 +95,4 @@ class LawnGrass(Product):
 # print(ex_1 + ex_3_normal)
 # print(str(ex_1))
 # print(repr(ex_5))
-# # print(ex_1 + ex_5)
+# # print(ex_4 + ex_5)

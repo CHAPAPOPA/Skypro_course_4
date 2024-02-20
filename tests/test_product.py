@@ -82,12 +82,14 @@ def test_set_price_zero(milk, capsys):
     assert 'Цена введена некорректная' in captured.out
 
 
-def test_addition(milk, smartphone):
+def test_addition(milk, smartphone, lawn_grass):
     cheese = Product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
     total_cost = milk + cheese
     assert total_cost == 140.67 * 45 + 120 * 67
     with pytest.raises(TypeError):
         milk + smartphone
+    with pytest.raises(TypeError):
+        lawn_grass + smartphone
 
 
 def test_len(milk):
