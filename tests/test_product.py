@@ -92,6 +92,8 @@ def test_addition(milk, smartphone, lawn_grass):
         smartphone + 5
     with pytest.raises(TypeError):
         lawn_grass + 5
+    with pytest.raises(TypeError):
+        lawn_grass + smartphone
 
 
 def test_len(milk):
@@ -103,4 +105,6 @@ def test_str(milk):
 
 
 def test_repr(milk):
-    assert repr(milk) == 'Product(Молоко, 140.67, 45, Молочные, Белое)'
+    assert repr(milk) == ("Создан объект: Product - {'name': 'Молоко', 'description': 'Из цельного "
+                          "молока', '_price': 140.67, 'count_in_stock': 45, 'category': 'Молочные', "
+                          "'color': 'Белое'}")
