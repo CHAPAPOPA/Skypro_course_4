@@ -1,4 +1,34 @@
-class Product:
+from abc import ABC, abstractmethod
+
+
+class Item(ABC):
+    @abstractmethod
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def __add__(self, other):
+        pass
+
+    @abstractmethod
+    def __len__(self):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        pass
+
+    @abstractmethod
+    def __repr__(self):
+        pass
+
+
+class ReprMixin:
+    def __repr__(self, *args, **kwargs):
+        return f"Создан объект: {self.__class__.__name__} - {self.__dict__}"
+
+
+class Product(ReprMixin, Item):
     name: str
     description: str
     price: int or float
@@ -7,6 +37,7 @@ class Product:
     color: str
 
     def __init__(self, name, description, price, count_in_stock, category, color):
+        super().__init__()
         self.name = name
         self.description = description
         self._price = price
@@ -45,11 +76,8 @@ class Product:
     def __str__(self):
         return f'{self.name}, {self.price} руб. Остаток: {len(self)} шт.'
 
-    def __repr__(self):
-        return f'{self.__class__.__name__}({self.name}, {self.price}, {len(self)}, {self.category}, {self.color})'
 
-
-class Smartphone(Product):
+class Smartphone(Product, ReprMixin):
     efficiency: int or float
     model: str
     amount_memory: str
@@ -66,7 +94,7 @@ class Smartphone(Product):
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, ReprMixin):
     origin_country: str
     germination_period: int or float
 
