@@ -37,7 +37,6 @@ class Product(ReprMixin, Item):
     color: str
 
     def __init__(self, name, description, price, count_in_stock, category, color):
-        super().__init__()
         self.name = name
         self.description = description
         self._price = price
@@ -109,19 +108,19 @@ class LawnGrass(Product, ReprMixin):
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
 
-# ex_1 = Product('Молоко', 'Из цельного молока', 100, 45, 'Молочные', 'Белое')
-# ex_2 = Product('Говядина', 'Отборная', 23, 44, 'Мясо', 'Красная')
-# ex_3 = Product('.', '.', 0, 0, '', '')
-# ex_4 = Smartphone('iPhone 13', 'Смартфон Apple', 91_000, 10, 'Smartphone', 'чёрный', 8, '13', '256GB')
-# ex_5 = LawnGrass('Bluegrass', 'Семена газонной травы', 5, 100, 'LawnGrass', 'зелёный', 'USA', 14)
-#
-# ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
-# print(ex_3_normal)
-# print(ex_1.price)
-# ex_3.price = 0
-# ex_3.price = 121
-# print(ex_3.price)
-# print(ex_1 + ex_3_normal)
-# print(str(ex_1))
-# print(repr(ex_5))
-# # print(ex_1 + ex_5)
+ex_1 = Product('Молоко', 'Из цельного молока', 100, 45, 'Молочные', 'Белое')
+ex_2 = Product('Говядина', 'Отборная', 23, 44, 'Мясо', 'Красная')
+ex_3 = Product('.', '.', 0, 0, '', '')
+ex_4 = Smartphone('iPhone 13', 'Смартфон Apple', 91_000, 10, 'Smartphone', 'чёрный', 8, '13', '256GB')
+ex_5 = LawnGrass('Bluegrass', 'Семена газонной травы', 5, 100, 'LawnGrass', 'зелёный', 'USA', 14)
+
+ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
+print(ex_3_normal)
+print(ex_1.price)
+ex_3.price = 0
+ex_3.price = 121
+print(ex_3.price)
+print(ex_1 + ex_3_normal)
+print(str(ex_1))
+print(repr(ex_5))
+print(ex_1 + ex_5)
