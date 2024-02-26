@@ -19,6 +19,8 @@ class Category:
     def add_products(self, product):
         """Метод добавления товаров в список-атрибут класса."""
         if isinstance(product, Product):
+            if product.count_in_stock == 0:
+                raise ValueError('Товар с нулевым количеством не может быть добавлен')
             self.__products.append(product)
             return self.__products
         raise TypeError('Можно добавить только экземпляры классов Product или его наследников')
@@ -27,6 +29,14 @@ class Category:
     def get_products_list(self):
         """Метод-геттер, предназначенный для вывода товаров в определенном формате."""
         return (f'{i.name}, {i.price} руб. Остаток: {i.count_in_stock} шт.' for i in self.__products)
+
+    def avg_price(self):
+        try:
+            avg = sum(i.price for i in self.__products) / len(self.__products)
+            return avg
+        except ZeroDivisionError:
+            print('В категории нет товаров')
+            return 0
 
     def __len__(self):
         """Метод возвращает общее количество товаров в категории."""
@@ -45,12 +55,12 @@ class Category:
 # ex_product_3 = Product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
 # ex_smartphone = Smartphone('iPhone 13', 'Смартфон Apple', 91_000, 10, 'Smartphone', 'чёрный', 8, '13', '256GB')
 # ex_lawn_grass = LawnGrass('Bluegrass', 'Семена газонной травы', 5, 100, 'LawnGrass', 'зелёный', 'USA', 14)
-# ex_1 = Category('Молочные', 'Из цельного молока', [ex_product_1])
+# ex_1 = Category('Молочные', 'Из цельного молока', [])
 # ex_2 = Category('Мясо', 'Говядина', [ex_product_2])
 # ex_no = ('Мясо', 'Говядина')
 #
 #
-# ex_1.add_products(ex_lawn_grass)
+# e = ex_1.add_products(ex_lawn_grass)
 # # ex_1.add_products(ex_no)
 # print(repr(ex_1))
 # print(repr(ex_2))
@@ -58,3 +68,5 @@ class Category:
 # print(len(ex_2))
 # print(str(ex_smartphone))
 # print(str(ex_2))
+# print(ex_1.add_products(ex_product_2))
+# print(ex_1.avg_price())
