@@ -63,8 +63,7 @@ class Product(ReprMixin, Item):
             self._price = new_price
 
     def __add__(self, other):
-        # if type(self) != type(other):
-        if not isinstance(other, Product):
+        if type(self) is not type(other):
             raise TypeError('Нельзя складывать продукты разных типов')
         return self.price * self.count_in_stock + other.price * other.count_in_stock
 
@@ -87,11 +86,6 @@ class Smartphone(Product, ReprMixin):
         self.model = model
         self.amount_memory = amount_memory
 
-    def __add__(self, other):
-        if not isinstance(other, Smartphone):
-            raise TypeError('Нельзя складывать продукты разных типов')
-        return self.price * self.count_in_stock + other.price * other.count_in_stock
-
 
 class LawnGrass(Product, ReprMixin):
     origin_country: str
@@ -101,27 +95,3 @@ class LawnGrass(Product, ReprMixin):
         super().__init__(name, description, price, count_in_stock, category, color)
         self.origin_country = origin_country
         self.germination_period = germination_period
-
-    def __add__(self, other):
-        if not isinstance(other, LawnGrass):
-            raise TypeError('Нельзя складывать продукты разных типов')
-        return self.price * self.count_in_stock + other.price * other.count_in_stock
-
-
-# ex_1 = Product('Молоко', 'Из цельного молока', 100, 45, 'Молочные', 'Белое')
-# ex_2 = Product('Говядина', 'Отборная', 23, 44, 'Мясо', 'Красная')
-# ex_3 = Product('.', '.', 0, 0, '', '')
-# ex_4 = Smartphone('iPhone 13', 'Смартфон Apple', 91_000, 10, 'Smartphone', 'чёрный', 8, '13', '256GB')
-# ex_5 = LawnGrass('Bluegrass', 'Семена газонной травы', 5, 100, 'LawnGrass', 'зелёный', 'USA', 14)
-#
-#
-# ex_3_normal = ex_3.create_product('Сыр', 'Тильзитер', 120, 67, 'Молочные', 'Жёлтый')
-# print(ex_3_normal)
-# print(ex_1.price)
-# ex_3.price = 0
-# ex_3.price = 121
-# print(ex_3.price)
-# print(ex_1 + ex_3_normal)
-# print(str(ex_1))
-# print(repr(ex_5))
-# # print(ex_1 + ex_5)
