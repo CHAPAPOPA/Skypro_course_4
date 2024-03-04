@@ -51,6 +51,10 @@ def test_add_products(category_milk, product_milk, product_cheese, product_smart
     with pytest.raises(TypeError):
         category_milk.add_products(ex_no)
 
+    product_1 = Product('Сыр', 'Тильзитер', 120, 0, 'Молочные', 'Жёлтый')
+    with pytest.raises(ValueError):
+        category_milk.add_products(product_1)
+
 
 def test_get_products_list(category_milk, product_milk, product_cheese):
     category_milk.add_products(product_milk)
@@ -59,6 +63,13 @@ def test_get_products_list(category_milk, product_milk, product_cheese):
     assert len(products_list) == 2
     assert products_list[0] == 'Молоко, 140.67 руб. Остаток: 45 шт.'
     assert products_list[1] == 'Сыр, 120 руб. Остаток: 67 шт.'
+
+
+def test_avg_price(category_milk, product_milk, product_cheese):
+    assert category_milk.avg_price() == 0
+    category_milk.add_products(product_milk)
+    category_milk.add_products(product_cheese)
+    assert category_milk.avg_price() == 130.33499999999998
 
 
 def test_len(category_milk, product_milk, product_cheese):
